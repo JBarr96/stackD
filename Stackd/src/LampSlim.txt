@@ -1,0 +1,31 @@
+#!/bin/bash
+# Software Engineering Principles Project Script
+
+vagrant up
+vagrant ssh
+sudo apt-get update
+sudo apt-get install lamp-server^
+cd /var/www/html/
+sudo adduser vagrant www-data
+sudo chown -R www-data:www-data /var/www
+sudo chmod -R g+rw /var/www
+sudo apt-get update
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+sudo a2enmod rewrite
+sudo adduser ubuntu www-data
+sudo chmod 777 /var/www/html/
+composer create-project slim/slim-skeleton slim
+cd slim
+sudo chmod 777 /var/www/html/slim/
+sudo chmod 777 /var/www/html/slim/public
+sudo chown ubuntu /var/www/html/slim
+cd ..
+sudo chown -R www-data:www-data /var/www/html/slim
+cd slim/scrc/
+mysql -u root -p
+mysql> create database slimdatabase;
+mysql> use slimdatabase;
+
+
+
+
